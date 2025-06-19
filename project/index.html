@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turbo Rush - Ultimate Racing Experience</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body data-theme="dark">
+    <!-- Particle Background -->
+    <div id="particles-bg"></div>
+    
+    <!-- Cursor Trail -->
+    <div id="cursor-trail"></div>
+
+    <!-- Loading Screen -->
+    <div id="loader" class="loader">
+        <div class="loader-content">
+            <div class="racing-logo">
+                <div class="logo-ring"></div>
+                <div class="logo-center">TR</div>
+            </div>
+            <div class="loader-text">TURBO RUSH</div>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+            <div class="loading-percentage">0%</div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar glass-effect">
+        <div class="nav-container">
+            <a href="#home" class="nav-logo ripple-btn">
+                <div class="logo-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <span>TURBO RUSH</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link ripple-btn">Home</a></li>
+                <li><a href="#game" class="nav-link ripple-btn">Game</a></li>
+                <li><a href="#leaderboard" class="nav-link ripple-btn">Leaderboard</a></li>
+                <li><a href="#garage" class="nav-link ripple-btn">Garage</a></li>
+                <li><a href="#profile" class="nav-link ripple-btn">Profile</a></li>
+            </ul>
+            <div class="nav-controls">
+                <div class="user-menu" id="userMenu">
+                    <button class="user-btn ripple-btn" id="userBtn">
+                        <i class="fas fa-user"></i>
+                        <span id="userName">Guest</span>
+                    </button>
+                    <div class="user-dropdown" id="userDropdown">
+                        <div class="user-info" id="userInfo">
+                            <div class="user-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="user-details">
+                                <div class="user-name" id="dropdownUserName">Guest Player</div>
+                                <div class="user-level">Level 1</div>
+                            </div>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <button class="dropdown-item ripple-btn" onclick="showLoginModal()">
+                            <i class="fas fa-sign-in-alt"></i>
+                            Login / Register
+                        </button>
+                        <button class="dropdown-item ripple-btn" onclick="logout()" id="logoutBtn" style="display: none;">
+                            <i class="fas fa-sign-out-alt"></i>
+                            Logout
+                        </button>
+                    </div>
+                </div>
+                <button id="theme-toggle" class="theme-toggle ripple-btn">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <div class="hamburger" id="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-bg">
+            <div class="grid-overlay"></div>
+            <div class="floating-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+            </div>
+        </div>
+        <div class="hero-content">
+            <div class="container">
+                <div class="hero-main">
+                    <h1 class="hero-title">
+                        <span class="title-word" data-text="TURBO">TURBO</span>
+                        <span class="title-word highlight" data-text="RUSH">RUSH</span>
+                    </h1>
+                    <p class="hero-subtitle">
+                        Experience the ultimate racing thrill with cutting-edge graphics, 
+                        realistic physics, and heart-pounding gameplay!
+                    </p>
+                    <div class="hero-buttons">
+                        <button onclick="scrollToGame()" class="btn btn-primary ripple-btn">
+                            <i class="fas fa-play"></i>
+                            <span>Start Racing</span>
+                        </button>
+                        <button onclick="showGarage()" class="btn btn-secondary ripple-btn">
+                            <i class="fas fa-car"></i>
+                            <span>View Garage</span>
+                        </button>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat-card">
+                            <div class="stat-number" data-target="25">0</div>
+                            <div class="stat-label">Premium Cars</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" data-target="1247">0</div>
+                            <div class="stat-label">Active Players</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" data-target="15">0</div>
+                            <div class="stat-label">Racing Tracks</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="car-showcase">
+                        <div class="car-3d">
+                            <div class="car-body"></div>
+                            <div class="car-glow"></div>
+                        </div>
+                        <div class="showcase-rings">
+                            <div class="ring ring-1"></div>
+                            <div class="ring ring-2"></div>
+                            <div class="ring ring-3"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Game Section -->
+    <section id="game" class="game-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">RACING ARENA</h2>
+                <p class="section-subtitle">
+                    Choose your machine and dominate the track
+                </p>
+            </div>
+            
+            <div class="game-container">
+                <div class="game-ui glass-effect">
+                    <div class="game-stats">
+                        <div class="stat-box">
+                            <div class="stat-icon">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                            <div class="stat-info">
+                                <span class="stat-value" id="score">0</span>
+                                <span class="stat-name">Score</span>
+                            </div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-icon">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <div class="stat-info">
+                                <span class="stat-value" id="lives">3</span>
+                                <span class="stat-name">Lives</span>
+                            </div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-icon">
+                                <i class="fas fa-road"></i>
+                            </div>
+                            <div class="stat-info">
+                                <span class="stat-value" id="distance">0</span>
+                                <span class="stat-name">Distance</span>
+                            </div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-icon">
+                                <i class="fas fa-tachometer-alt"></i>
+                            </div>
+                            <div class="stat-info">
+                                <span class="stat-value" id="speed">0</span>
+                                <span class="stat-name">Speed</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="game-controls">
+                        <button id="startBtn" class="control-btn ripple-btn">
+                            <i class="fas fa-play"></i>
+                            <span>Start</span>
+                        </button>
+                        <button id="pauseBtn" class="control-btn ripple-btn" style="display: none;">
+                            <i class="fas fa-pause"></i>
+                            <span>Pause</span>
+                        </button>
+                        <button id="resetBtn" class="control-btn ripple-btn">
+                            <i class="fas fa-redo"></i>
+                            <span>Reset</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="game-canvas-container glass-effect">
+                    <canvas id="gameCanvas" width="800" height="600"></canvas>
+                    <div id="gameOverlay" class="game-overlay">
+                        <div class="overlay-content">
+                            <h3 id="overlayTitle">Turbo Rush</h3>
+                            <p id="overlayMessage">Choose your car and start racing!</p>
+                            <button id="overlayBtn" class="btn btn-primary ripple-btn">
+                                <span>Start Racing</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mobile-controls">
+                    <div class="control-pad">
+                        <button id="leftBtn" class="mobile-btn ripple-btn">
+                            <i class="fas fa-arrow-left"></i>
+                        </button>
+                        <button id="upBtn" class="mobile-btn ripple-btn">
+                            <i class="fas fa-arrow-up"></i>
+                        </button>
+                        <button id="downBtn" class="mobile-btn ripple-btn">
+                            <i class="fas fa-arrow-down"></i>
+                        </button>
+                        <button id="rightBtn" class="mobile-btn ripple-btn">
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leaderboard Section -->
+    <section id="leaderboard" class="leaderboard-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">GLOBAL LEADERBOARD</h2>
+                <p class="section-subtitle">
+                    Compete with the best racers worldwide
+                </p>
+            </div>
+            
+            <div class="leaderboard-container">
+                <div class="leaderboard-table glass-effect">
+                    <div class="table-header">
+                        <div class="header-cell">Rank</div>
+                        <div class="header-cell">Player</div>
+                        <div class="header-cell">Score</div>
+                        <div class="header-cell">Distance</div>
+                        <div class="header-cell">Car</div>
+                    </div>
+                    <div class="table-body" id="leaderboardBody">
+                        <!-- Leaderboard entries will be populated by JavaScript -->
+                    </div>
+                </div>
+                
+                <div class="player-stats glass-effect">
+                    <h3>Your Performance</h3>
+                    <div class="personal-stats">
+                        <div class="personal-stat">
+                            <div class="stat-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="stat-details">
+                                <span class="stat-label">Best Score</span>
+                                <span class="stat-value" id="personalBest">0</span>
+                            </div>
+                        </div>
+                        <div class="personal-stat">
+                            <div class="stat-icon">
+                                <i class="fas fa-road"></i>
+                            </div>
+                            <div class="stat-details">
+                                <span class="stat-label">Best Distance</span>
+                                <span class="stat-value" id="personalDistance">0m</span>
+                            </div>
+                        </div>
+                        <div class="personal-stat">
+                            <div class="stat-icon">
+                                <i class="fas fa-gamepad"></i>
+                            </div>
+                            <div class="stat-details">
+                                <span class="stat-label">Games Played</span>
+                                <span class="stat-value" id="gamesPlayed">0</span>
+                            </div>
+                        </div>
+                        <div class="personal-stat">
+                            <div class="stat-icon">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                            <div class="stat-details">
+                                <span class="stat-label">Rank</span>
+                                <span class="stat-value" id="playerRank">-</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Garage Section -->
+    <section id="garage" class="garage-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">CAR GARAGE</h2>
+                <p class="section-subtitle">
+                    Choose your ultimate racing machine
+                </p>
+            </div>
+            
+            <div class="garage-grid" id="garageGrid">
+                <!-- Car cards will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Profile Section -->
+    <section id="profile" class="profile-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">PLAYER PROFILE</h2>
+                <p class="section-subtitle">
+                    Track your racing journey
+                </p>
+            </div>
+            
+            <div class="profile-container" id="profileContainer">
+                <div class="profile-card glass-effect">
+                    <div class="profile-header">
+                        <div class="profile-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="profile-info">
+                            <h3 id="profileName">Guest Player</h3>
+                            <div class="profile-level">
+                                <span>Level <span id="profileLevel">1</span></span>
+                                <div class="level-progress">
+                                    <div class="progress-fill" id="levelProgress"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="profile-stats">
+                        <div class="profile-stat">
+                            <div class="stat-icon">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                            <div class="stat-content">
+                                <span class="stat-number" id="profileScore">0</span>
+                                <span class="stat-label">Total Score</span>
+                            </div>
+                        </div>
+                        <div class="profile-stat">
+                            <div class="stat-icon">
+                                <i class="fas fa-road"></i>
+                            </div>
+                            <div class="stat-content">
+                                <span class="stat-number" id="profileDistance">0</span>
+                                <span class="stat-label">Total Distance</span>
+                            </div>
+                        </div>
+                        <div class="profile-stat">
+                            <div class="stat-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="stat-content">
+                                <span class="stat-number" id="profileTime">0h</span>
+                                <span class="stat-label">Play Time</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="achievements">
+                        <h4>Achievements</h4>
+                        <div class="achievement-grid" id="achievementGrid">
+                            <!-- Achievements will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content glass-effect">
+            <div class="modal-header">
+                <h3>Join the Race</h3>
+                <button onclick="closeModal('loginModal')" class="modal-close ripple-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="auth-tabs">
+                    <button class="auth-tab active" onclick="switchTab('login')">Login</button>
+                    <button class="auth-tab" onclick="switchTab('register')">Register</button>
+                </div>
+                
+                <form id="loginForm" class="auth-form">
+                    <div class="form-group">
+                        <input type="text" id="loginUsername" required>
+                        <label>Username</label>
+                        <div class="form-line"></div>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="loginPassword" required>
+                        <label>Password</label>
+                        <div class="form-line"></div>
+                    </div>
+                    <button type="submit" class="btn btn-primary ripple-btn">
+                        <i class="fas fa-sign-in-alt"></i>
+                        <span>Login</span>
+                    </button>
+                </form>
+                
+                <form id="registerForm" class="auth-form" style="display: none;">
+                    <div class="form-group">
+                        <input type="text" id="registerUsername" required>
+                        <label>Username</label>
+                        <div class="form-line"></div>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="registerEmail" required>
+                        <label>Email</label>
+                        <div class="form-line"></div>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="registerPassword" required>
+                        <label>Password</label>
+                        <div class="form-line"></div>
+                    </div>
+                    <button type="submit" class="btn btn-primary ripple-btn">
+                        <i class="fas fa-user-plus"></i>
+                        <span>Register</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Car Selection Modal -->
+    <div id="carModal" class="modal">
+        <div class="modal-content glass-effect">
+            <div class="modal-header">
+                <h3>Choose Your Racing Machine</h3>
+                <button onclick="closeModal('carModal')" class="modal-close ripple-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="car-selection-grid" id="carSelectionGrid">
+                    <!-- Car selection will be populated by JavaScript -->
+                </div>
+                <div class="selection-footer">
+                    <button class="btn btn-primary ripple-btn" onclick="confirmCarSelection()">
+                        <i class="fas fa-check"></i>
+                        <span>Start Racing</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back to Top -->
+    <button id="backToTop" class="back-to-top ripple-btn">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Notification System -->
+    <div id="notifications" class="notifications"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
